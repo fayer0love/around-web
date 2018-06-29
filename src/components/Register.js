@@ -2,6 +2,8 @@ import React from 'react';
 import $ from 'jquery';
 import { API_ROOT } from '../constants';
 import { Form, Input, Button, message } from 'antd';
+import { Link } from 'react-router-dom'
+
 const FormItem = Form.Item;
 
 class RegistrationForm extends React.Component {
@@ -20,9 +22,10 @@ class RegistrationForm extends React.Component {
           data: JSON.stringify({
             username: values.username,
             password: values.password,
-          })
+          }),
         }).then((response) => {
           message.success(response);
+          this.props.history.push('/login');
         }, (response) => {
           message.error(response.responseText);
         }).catch((error) => {
@@ -127,6 +130,8 @@ class RegistrationForm extends React.Component {
         </FormItem>
         <FormItem {...tailFormItemLayout}>
           <Button type="primary" htmlType="submit">Register</Button>
+          <p>I already have an account, go back to <Link to="/login">login</Link>
+          </p>
         </FormItem>
       </Form>
     );
