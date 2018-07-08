@@ -73,7 +73,7 @@ export class Home extends React.Component {
     const { lat, lon } = JSON.parse(localStorage.getItem(POS_KEY));
     this.setState({ loadingPosts: true, error: ''});
     $.ajax({
-      url: `${API_ROOT}/search?lat=${lat}&lon=${lon}&range=20000`,
+      url: `${API_ROOT}/search?lat=${lat}&lon=${lon}&range=200`,
       method: 'GET',
       headers: {
         Authorization: `${AUTH_PREFIX} ${localStorage.getItem(TOKEN_KEY)}`
@@ -90,7 +90,7 @@ export class Home extends React.Component {
   }
 
   render() {
-    const createPostButton = <CreatePostButton/>;
+    const createPostButton = <CreatePostButton loadNearbyPosts={this.loadNearbyPosts}/>;
     return (
       <Tabs tabBarExtraContent={createPostButton} className="main-tabs">
         <TabPane tab="Posts" key="1">
