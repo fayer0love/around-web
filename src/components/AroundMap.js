@@ -12,9 +12,7 @@ class AroundMap extends React.Component {
         defaultCenter={{ lat, lng: lon }}
       >
         {this.props.posts.map((post) => {
-          const postsLocation = post.location;
-          const location = { lat: postsLocation.lat, lng: postsLocation.lon };
-          return <AroundMarker location={location} key={post.url}/>
+          return <AroundMarker post={post} key={post.url}/>
         })}
         </GoogleMap>
     );
