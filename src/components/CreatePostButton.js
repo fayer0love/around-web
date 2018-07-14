@@ -3,7 +3,7 @@ import { Modal, Button } from 'antd';
 import { message } from 'antd/lib/index'
 import $ from 'jquery'
 import { WrappedCreatePostForm } from './CreatePostForm'
-import { AUTH_PREFIX, POS_KEY, TOKEN_KEY, API_ROOT} from '../constants'
+import { AUTH_PREFIX, POS_KEY, TOKEN_KEY, API_ROOT, LOC_SHAKE} from '../constants'
 
 export class CreatePostButton extends Component {
   state = {
@@ -23,8 +23,8 @@ export class CreatePostButton extends Component {
     this.form.validateFields((err, values) => {
       const { lat, lon } = JSON.parse(localStorage.getItem(POS_KEY));
       const formData = new FormData();
-      formData.set('lat', lat);
-      formData.set('lon', lon);
+      formData.set('lat', lat + Math.random() * LOC_SHAKE * 2 - LOC_SHAKE);
+      formData.set('lon', lon + Math.random() * LOC_SHAKE * 2 - LOC_SHAKE);
       formData.set('message', values.message);
       formData.set('image', values.image[0].originFileObj);
 
